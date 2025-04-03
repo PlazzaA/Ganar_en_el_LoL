@@ -10,77 +10,7 @@ Proyecto de **Análisis Exploratorio de Datos (EDA)** enfocado en partidas de *L
 - Relación entre asesinatos y victorias.  
 - Impacto del primer dragón/torre o cantidad de minions.  
 - Campeones u objetos desbalanceados.  
-- Influencia de la visión (wards) en el resultado.  
-
----
-
-## 🗂 Estructura del repositorio  
-
-EDA_LoL/
-├── data/ # Datos brutos y procesados
-│ ├── raw/ # Datos originales (sin procesar)
-│ │ ├── champs.csv # Información de campeones (ID, nombre)
-│ │ ├── matches.csv # Metadatos de partidas
-│ │ ├── participants.csv # Relación jugador-partida-campeón
-│ │ ├── stats1.csv # Stats equipo azul
-│ │ ├── stats2.csv # Stats equipo rojo
-│ │ ├── teambans.csv # Bans por equipo
-│ │ └── teamstats.csv # Estadísticas globales por equipo
-│ │
-│ └── processed/ # Datos transformados
-│ ├── clean_matches.parquet # Partidas limpias
-│ ├── champion_stats.csv # Stats agregados por campeón
-│ └── match_features.csv # Features para modelado
-│
-├── notebooks/ # Jupyter Notebooks
-│ ├── 01_EDA_Initial.ipynb # Análisis exploratorio inicial
-│ ├── 02_Feature_Engineering.ipynb # Creación de features
-│ └── 03_Statistical_Analysis.ipynb # Pruebas de hipótesis
-│
-├── src/ # Código fuente Python
-│ ├── data_processing.py # Funciones para limpieza de datos
-│ ├── visualization.py # Helpers para gráficos
-│ └── analysis.py # Funciones analíticas
-│
-├── reports/ # Resultados y reportes
-│ ├── figures/ # Gráficos exportados
-│ │ ├── winrate_by_champ.png
-│ │ └── objectives_impact.png
-│ └── insights_report.pdf # Reporte final en PDF
-│
-├── .gitignore # Archivos excluidos de Git
-├── requirements.txt # Dependencias Python
-├── README.md # Este archivo
-└── LICENSE # Licencia MIT
-
-1. **`data/`**
-   - **`raw/`**: Datos originales sin modificar
-     - Cada CSV corresponde a una tabla relacional
-     - Preservar formato original para trazabilidad
-   - **`processed/`**: 
-     - Datos limpios y listos para análisis
-     - Formatos optimizados (Parquet para grandes datasets)
-
-2. **`notebooks/`**
-   - Flujo de análisis secuencial:
-     1. `01_EDA_Initial`: Limpieza y primeras visualizaciones
-     2. `02_Feature_Engineering`: Creación de métricas clave
-     3. `03_Statistical_Analysis`: Validación de hipótesis
-
-3. **`src/`**
-   - Código modularizado:
-     - `data_processing.py`: Funciones para ETL
-     ```python
-     def clean_matches(df):
-         """Elimina partidas inválidas y normaliza columnas"""
-         return df.dropna().reset_index(drop=True)
-     ```
-     - `visualization.py`: Templates para gráficos recurrentes
-
-4. **`reports/`**
-   - Resultados exportados:
-     - Figuras en alta resolución (PNG/SVG)
-     - Reporte final con conclusiones clave
+- Influencia de la visión (wards) en el resultado.
 
 ---
 
@@ -97,6 +27,22 @@ EDA_LoL/
 3. **Ejecutar**:
    ```bash
    jupyter notebook EDA_LoL.ipynb
+
+---
+
+## 🗂 Estructura del repositorio  
+
+> Como_ganar_en_lol/
+>> data/ (Todos los dataframe reducidos)
+>>>  *DataFrames.csv
+
+>> graphs/ (Todos los gráficos obtenidos)
+>>> *gráficos.png
+
+>> EDA_LoL.ipynb (Memoria del EDA, incluyendo además la fuente de los dataframe para poder descargarlos sin reducir)                        
+>> README.md (Este markdown que esta leyendo)
+
+---
 
 ## 🔍 Hallazgos Clave
 
@@ -122,10 +68,3 @@ Top 5 Campeones con Mayor Winrate:
 |Draven  |	54.9%  |	9.2% 	    |3.1 |
 |Malzahar|	45.1%  |	6.5% 	    |2.4 |
 
-**Visualización**:
-```python
-plt.figure(figsize=(10,6))
-sns.barplot(x='factor', y='winrate', data=impacto_df)
-plt.title('Impacto de Factores en Winrate')
-plt.xticks(rotation=45)
-plt.show()
